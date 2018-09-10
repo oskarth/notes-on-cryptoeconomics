@@ -48,6 +48,9 @@ problems.
 
 Litmus test: organization/community survive without core contributors/paycheck.
 
+3) More generally, how to balance decentralization/scalability/security? This is
+essentially Ethereum 2.0 and grokking it at a fundamental level.
+
 \chapter{Readings}
 
 Anything by Vitalik or Szabo is a good start and meaty. Have a bunch in inbox.
@@ -60,5 +63,114 @@ keep in mind:
 - Is there any empirical basis for this or is it still a theoretical construct?
 - Lindy effect: Comparable that's 30y/10y or so old? Otherwise maybe BS.
 
+\section{Vitalik - Minimal Slashing Conditions (2017)}
+\link{https://medium.com/@VitalikButerin/minimal-slashing-conditions-20f0b500fc6c}{link}
 
-TODO: Set up basic reference system
+Interest of this is around learning how to think about *slashing conditions*,
+i.e. punishing bad behavior. Probably lacking some pre-requsites in *byzantine
+fault tolerance consensus algorithms*.
+
+What does it mean for a block to be economically finalized?
+\textbf{Definition}: a block is *economically finalized* with *cryptoeconomic
+security margin* $X if it is guaranteed to be in the canonical chain for ever,
+or if it costs set of actors at least $X to remove it from the state.
+
+This is key to Casper design. Validators must submit a *security deposit* to
+participate, and this can get taken away if the protocol isn't followed. Under
+what conditions is what is referred to as *slashing conditions*.
+
+Example: PREPARE and COMMIT statements. Key to byzantine fault tolerance
+consensus two phase consensus design apparently, but not elaborated on right
+now.
+
+If a validator sends two PREPARE messages within same epoch but with different
+hashes, say, that should be punished. It's easy for an honest validator not to
+do this.
+
+When is a block hash *finalized*?
+When, within a given epoch, you get enough messages of type `[COMMIT, epoch,
+  hash]` that the validator's deposits add up to 2/3 of the *active validator
+set* deposits.
+
+There are some conditions that slashing conditinos have to meet. One is around
+*accountable safety*, which says something like: if two hashes gets committed (fork) then
+at least 1/3 of validators can be penalized. Other is around *plausible liveness*, which
+is something like: system shouldn't be stuck, there has to be a set of messages
+that can be sent that 2/3 agree on without validating slashing conditions.
+
+Let's be a bit more formal.
+
+What conditions does a *slashing condition* need to satisfy?
+Accountable safety and plausible liveness.
+
+What does Vitalik mean by *accountable safety*?
+If two conflicting hashes gets finalized, it must be (provably) true that at
+least 1/3 of validators violated some slashing conditions. This is the
+``economic finality'' idea.
+
+What does Vitalik mean by *plausible liveness*?
+Unless 1/3 of validators violate some slashing condition, there must be a set of
+messages 2/3 of validators can send that finalize a new hash without violating
+slashing conditions.
+
+This reminds me of: Schelling points, as well as structured order for Anki (Q/A).
+
+I assume this is directly taken from BFT literature regarding safety and
+liveness. It'd be useful to understand these in more depth, along with things
+like sync assumptions (sync/partial/async). It isn't clear to me how this is
+directly related to any of the specific problems addressed in top, though it is
+vital for Ethereum 2.0 in general.
+
+There's examples of safety but not liveness, and v.v. Shows failure modes.
+
+These are like little puzzles. Should be able to come up with answers myself.
+
+Quoting algorithm 1:
+> Algorithm 1: every validator has exactly one opportunity to send a message of
+the form ["COMMIT", HASH]. If 2/3 of validators send a COMMIT for the same hash,
+that hash is finalized. Sending two COMMIT messages violates a slashing
+condition.
+
+Is this safe and live? Safety: if we have two conflicting hashes...
+
+Quoting algorithm 2:
+> Algorithm 2: every validator has exactly one opportunity to send a message of
+the form ["COMMIT", HASH, epoch]. If 2/3 of validators send a COMMIT for the
+same hash with the same epoch number, that hash is finalized. Sending two COMMIT
+messages with different hashes with the same epoch number violates a slashing
+condition.
+
+Is this safe and live?
+
+Not enough time to do this properly. Worth re-visiting though.
+
+The pudding is: you can get safety and liveness, but this is actually quite
+hard. It requires four slashing conditions, and there's a formal proof by Yoichi
+here: https://yoichihirai.com/minimal.pdf
+
+These are, roughly: COMMIT REQ (sending commit requires 2/3 prepares), PREPARE
+REQ (don't quite follow, but ancestor epoch related), PREPARE COMMIT CONSISTENCY
+(if you make commit you saw prepares, so prepares should ref recent epoch), NO
+DBL PREPARE (can't prepare twice in one epoch).
+
+I'm curious where this split in PREPARE and COMMIT comes from, surely that's a
+canonical BFT paper somewhere? Same re safety and liveness. What does distsys
+MIT curriculum say? (can't find anything at first glance).
+
+More human-memorable of safety/liveness: Safety - something bad will never
+happen; Liveness - system should always make progress.
+
+This type of reasoning/formal proofs is what allows us to make high level
+statements such as ``live under synchrony, safe under async'' in PBFT, etc.
+
+There's a lot more to this post, but that's a good start. Worth re-visiting.
+
+
+
+\textbf{Reading lists}
+Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
+
+
+Questions:
+- What's a good primer to byzantine fault tolerance consensus?
+- What classes of problems do you actually need consensus for? Not clear it is always needed.
