@@ -71,6 +71,10 @@ Interest of this is around learning how to think about *slashing conditions*,
 i.e. punishing bad behavior. Probably lacking some pre-requsites in *byzantine
 fault tolerance consensus algorithms*.
 
+What is the intention of using "economic finality" in Casper?
+To make 51% attacks very expensive (~$70m) once block is finalized. Even if
+majority of validators work together it means huge economic cost.
+
 What does it mean for a block to be economically finalized?
 \textbf{Definition}: a block is *economically finalized* with *cryptoeconomic
 security margin* $X if it is guaranteed to be in the canonical chain for ever,
@@ -166,6 +170,86 @@ statements such as ``live under synchrony, safe under async'' in PBFT, etc.
 
 There's a lot more to this post, but that's a good start. Worth re-visiting.
 
+\textbf{Vitalik - The Triangle of Harm (2017)}
+\link{https://vitalik.ca/general/2017/07/16/triangle_of_harm.html}{link}
+
+Goal: to understand roughly overview of incentive structure and constraints in
+e.g. Casper.
+
+Illustration: http://vitalik.ca/files/triangle_of_harm.png
+
+Majority (M), minority (m), and protocol/users (p). Different attack vectors:
+
+- M->m: majority griefing, 51% censorship
+- m->M: minority griefing (e.g. feather forking)
+- m->p: Minority attacks on protocol. e.g. Finney attacks
+- M->p: 51% attacks
+
+These are adverserial attacks.
+
+What is a Finney attack?
+In PoW, a miner mines a block with his tx and doesn't reveal it, instead double
+spending with 0 or 1 confirmations.
+
+What is feather forking?
+A minority refuses to mine a block that contains undesired txs / attempts to
+revert block.
+
+What is a 51% censorship attack?
+When cartel of miners refuse to accept blocks from minority.
+
+What is a 51% attack?
+When you control majority of hash power, you can double spend and release a
+longer chain.
+
+What's an example of a successful 51% attack?
+Bitcoin Gold 2018 May. Even 20 confirmations wasn't safe. ~$18M.
+
+Link: https://forum.bitcoingold.org/t/double-spend-attacks-on-exchanges/1362
+
+The idea with Casper's design is to put an upper limit on the amount of
+(economic) harm that can be caused to participants for all four classes of
+attacks. This is the essence of trust minimization.
+
+Bitcoin/PoW-based doesn't protect against Majority 51% types of attacks at all.
+
+There is something quite profound here. The observation is made that, while
+Nakamoto Consensus / PoW is punshing dissent (go with consensus, majority wins),
+Casper punishes equivocation.
+
+I.e. if you send two inconsistent messages, vs if you are with majority or
+minority.
+
+``The majority can attack the protocol only at heavy cost, and the majority
+cannot cause the minority to lose money.''.
+
+It is more difficult when it comes to liveness fault and censorship. Hm.
+
+What is speaker/listener equivalence?
+If B says they didn't receive message from A, can't tell the following scenarios
+apart: (i) A didn't send message (ii) B pretended not to see it.
+
+This leads to things like: punishing both sides (Game theoretic basis for this I
+believe?) This leads to griefing and we can do something called *griefing factor
+analysis* to be more rigorous about it.
+
+What does it mean for a griefing factor to be 3 (and 0 and inf)?
+If protocol allows me to cause you to lose $3 at cost of $1, griefing factor is
+3. If I can't cause you to lose money, it's 0, and if it is free, it is
+infinite.
+
+When we have speaker/listener dichotomy, the griefing factor can't globally be
+bounded above by a value above 1, for obvious reasons (if 0.5 then inverse is 2).
+
+Sometimes can be useful to have griefing factor be 2:0.5, e.g. 2 for majority
+attackers and 0.5 for minority, considering rarity.
+
+Protocol utility function: how well doing, e.g. in PoW how much is on main chain
+vs uncles. Asssuming we can formalize this wrt safety/liveness faults, this
+leads to an optimization problem. Woop woop.
+
+Worth re-reading. Taking notes a bit too close to reading so possibly didn't
+stick as deep as it could've.
 
 
 \textbf{Reading lists}
@@ -175,5 +259,8 @@ Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
 Questions:
 - What's a good primer to byzantine fault tolerance consensus?
 - What classes of problems do you actually need consensus for? Not clear it is always needed.
+
+
+https://blog.ethereum.org/2015/06/06/the-problem-of-censorship/
 
 \end{document}
