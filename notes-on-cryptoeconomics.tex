@@ -251,6 +251,90 @@ leads to an optimization problem. Woop woop.
 Worth re-reading. Taking notes a bit too close to reading so possibly didn't
 stick as deep as it could've.
 
+\textbf{COLONY Whitepaper (2018)}
+
+\link{https://colony.io/whitepaper.pdf}{link}
+
+Warning: System theoretical and not practical yet. Skimming to get some
+inspiration for funding structure etc. Timebox.
+
+It's a layer of human capital, a re-emergence of nature of the firm in
+trust-minimized environments. On chain actions.
+
+Colony is the structure. Tasks are subdivided into achievable units and then
+created, assigned, completed. Tasks can then be put into various domains to
+group them.
+
+Funding Allocation/Proposal described in section 8. There's a Reputation system
+in section 6.
+
+Reputation decays automatically and can't be transferred. Reputation Mining
+happens outside of chain. There is a Dispute Resolution System. And a Reward
+Payout Process.
+
+Some distinction between profit/no-profit/voluntary? They use some numerical
+parameters that aren't verified.
+
+Have they undergone an audit? How good are their contracts?
+
+There is a recovery mode as escape hatch for now to access funds.
+
+Tasks are the smallest unit. They have a manager (defining/coordinating
+delivery), worker (executer), and evaluator (completed satisfactory).
+
+Where is the funder?
+
+Manager selects evaluator and worker, and specifies rewards for all three, as
+well as spec and due date. Small stake but mostly to discover spam.
+
+Funding proposals separate?
+
+Domains are like folders in a computer. Right. Objections are raised to level
+above, so Development etc. I get the idea but is this anchored in reality? If
+you have a swarm with designers and dev and so on, do you really want to raise
+objections to global design function? Almost all orgs re-invent cross-matrix
+(Grove), so why this hierarchy? They do say it is meant to be used ad hoc
+though, so no big deal.
+
+At chapter 4, skipping to read briefly reputation 6 and funding 8.
+
+Reputation is tightly coupled to domain. So I can have a backend reputation and
+a frontend reputation. Seems like there's a risk to lead to segregation and
+politics.
+
+You earn reputation by completing tasks as well as dispute resolution a bit.
+
+Why use reputation for punishing uncomplete tasks as opposed to money stake?
+Maybe good, maybe bad.
+
+Three cases: no task minus, ok task plus great task plus 1.5
+
+Skipping reputation calculation 7 (wow big one).
+
+Funds and Bounties. Each domain and task has an associated pot.
+
+All tokens and currencies are in the main contract? Seems brittle. Maybe I
+misunderstood. I'd rather see this be p2p at its core though.
+
+Anyone part of colony can create proposal, req 0.1% of domain reputation. That's
+nice. Funding queue. Interesting.
+
+More reputation backs funding proposal the more backing/funding. That's another
+nice idea.
+
+Concrete example of possible over engineering: They add this ``priority funding'' mechanism and
+say ``imagine this will be useful'' - so it doesn't come from a specific
+experienced problem.
+
+Conclusion: It has some interesting ideas, but in general it seems like a whole
+lot of ``stuff'' that's just in there. What's the minimal core? More precisely:
+1. Are they using it themselves 100%? What's the experience?
+2. Is anyone out there using it yet?
+
+I'd like to see some evidence of above first.
+
+Further reads: DAICO, Truebit, etc
+Meta mistake: Reading and alttab as opposed to closing book and reading for 10m, better for synthesis.
 
 \textbf{Reading lists}
 Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
@@ -260,7 +344,18 @@ Questions:
 - What's a good primer to byzantine fault tolerance consensus?
 - What classes of problems do you actually need consensus for? Not clear it is always needed.
 
+https://ethresear.ch/t/explanation-of-daicos/465
 
 https://blog.ethereum.org/2015/06/06/the-problem-of-censorship/
+
+Truebit paper - verification game: https://people.cs.uchicago.edu/~teutsch/papers/truebit.pdf
+
+Nature of the firm 1937: http://www3.nccu.edu.tw/~jsfeng/CPEC11.pdf
+
+Initial ERC20/ICO definition?
+
+Assurance contracts and lucid free rider problem explanation, etc
+
+Game theory refresh/basics, some good examples in presentation from way back
 
 \end{document}
