@@ -336,6 +336,66 @@ I'd like to see some evidence of above first.
 Further reads: DAICO, Truebit, etc
 Meta mistake: Reading and alttab as opposed to closing book and reading for 10m, better for synthesis.
 
+\textbf{Augur: a Decentralized Oracle and Prediction Market Platform (2018)}
+
+\link{https://github.com/AugurProject/whitepaper/blob/master/english/whitepaper.pdf}{link}
+
+State: live on mainnet! Prediction markets have been around a while as well.
+Project quite old in Ethereum, 2014.
+
+Reading/skimming to understand if there's some mention on comparison with
+forecasting and bounties etc. See
+https://discuss.status.im/t/sitg-experiment-1-status-intense-micro-adoption/401/4
+thread
+
+Problem statement: I want to fund a certain outcome so I stake $1000, someone
+can be responsible for self-risk of $100. The idea being that that person tries
+to get outcome done.
+
+However, there's a side effect here. It seems functionally similiar to a
+prediction market, since no PoW is needed. This shifts incentives - really what
+I'm doing is not funding as muh as betting on outcome, on both sides. This would
+lead the big bet to be incentivized to sabotage to get my side to win. Funding
+is also almost by necessity not the same as betting, because you want a surplus.
+
+Is predictions only about forecasting with observations or does it including
+active intervention? To what degree?
+
+Let's read with computer closed this time for a bit.
+
+Nothing specific that is relevant right now in the whitepaper. Little on
+applications. They talk about various states of bets - creation, trade,
+reporting and settlement.
+
+Also mention REP and its use, not needed for trade but for creation etc. Open
+market where you buy shares, like 0.7 on outcome A or 0.3 on outcome B.
+Decentralized oracle reporting, e.g. some URL etc, is used and reporting is
+profit-based. Also dispute mechanisms and possible forking of universes. Fee
+windows. Market event as source of truth basded on some oracle.
+
+If you forecast incorrectly you lose money, but this lingo doesn't jive with
+funding at all. Why? Is it like the definition of truth, that it has to be well
+founded (eqv here being proof of work/plan of action?)
+
+Oracle / resolution source: connect real world to blockchain. Incentivized to
+tell the truth.
+
+Connection with mechanism design: in prediction markets we want people to be
+incentivized to report truth truthfully. This is an ``incentive compatible''
+design. Worth re-reading mechanism design lit a bit more.
+
+Practice research: launched quite recently, ~1000 markets and $1-2M staked.
+Could it be used for OKRs perhaps? What benefits would it have?
+
+Also checking: https://medium.com/coinmonks/why-is-no-one-really-using-augur-161448a8e198 re usability, though seems overcomeable.
+
+Does it work through Status? Asking.
+
+Other related directions:
+1. History of prediction markets more generally?
+2. Oracles. Szabo probably wrote something here. Cornell/IC3 had some interesting service as well. Town Crier.
+
+
 \textbf{Reading lists}
 Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
 
@@ -357,5 +417,15 @@ Initial ERC20/ICO definition?
 Assurance contracts and lucid free rider problem explanation, etc
 
 Game theory refresh/basics, some good examples in presentation from way back
+
+Hayek - The Use of Knowledge in Society (1945) https://www.kysq.org/docs/Hayek_45.pdf
+
+Hardin 1968 - Tragedy of the Commons
+Ostrom 1990 - Governing the Commons
+
+SSB Handbook - dist sys see model
+
+Town Crier - authenticated data feed http://www.initc3.org/files/tc.pdf
+
 
 \end{document}
