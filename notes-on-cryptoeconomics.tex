@@ -395,6 +395,148 @@ Other related directions:
 1. History of prediction markets more generally?
 2. Oracles. Szabo probably wrote something here. Cornell/IC3 had some interesting service as well. Town Crier.
 
+One key question that would be useful to answer is: To what extent is what you
+are considering re SITG funding different from what they already have? Right now
+my hunch is partially language, but also (a) precommitment, not liquid (b) tied
+to specific piece of work (credible) / locus of control.
+
+\textbf{Scuttlebutt handbook (?)}
+\link{https://www.scuttlebutt.nz/}{link}
+
+Decentralized chat. Reading to understand how it works differently, pull vs
+push, offline, gossip, etc. Used soemwhat. Not part of Ethereum ecosystem.
+
+There's a Gossip protocol and you subscribe to people and pubs to learn more.
+
+They have different apps, which are different ways of interacting with your
+scuttlebutt. Magic glasses. (This is getting pretty far from cryptoeconomics but
+whatever).
+
+- How does it do that more precisely? I.e. different rendering, markdown/html, etc.
+- If you don't like something block. How does it deal with negative reputation / spam, if at all?
+
+E.g. git ssb, completely different. How does that work?
+
+Design goal: avoid centralization and singletons. This means all peers are same.
+They still use pubs, which helps with offline inboxing. Some mention of NAT and
+so on, an area I'm not too familiar with.
+
+But no special data or access on a pub, instead you can have multiple. So
+different from email server. This is design we should have for offline inboxing.
+
+``Change pubs without losing data or identity''.
+
+Interesting point - it avoids singletons, e.g. things like a DHT and a global
+blockchain.
+
+FB etc is also p2p in some sense, but centralized implementation. Then real
+human p2p you have network p2p on top of it, at network layer.
+
+They claim blockchains are heavy (storage, cpu) and DHT prone to spam. Hmmmm,
+interesting point. So how does it work?
+
+Design Challenge: Sybil Attacks.
+
+How email deals with spam: filter it out with pattern matching.
+How social networks deal with spam: solicited, ie only receive from follows/friends.
+
+in SecureScuttleButt (SSB) you only communicate with trusted peers (friends). It's a social system.
+
+Open gossip protocol: everyone has a journal with write-only, when you see a
+friend you make a copy, to send message you encrypt with their key in your
+diary, when you read friend and can decrypt message it is for you.
+
+Wait, when you are on dsame wifi as a friends computers will gossip, so don't
+need to be on the internet to do it? That's extremely powerful.
+
+Genesis from Dominic Tarr and Snob. Inspired by Dynamo paper, CRDTs, Git, CouchDB.
+
+In CouchDB you can tail -f DB and sync changes.
+
+Using Trust in Open Networks - Trust ranking of shared data structures. Big
+section with juicy stuff.
+
+Two ways of dealing with trust - policy based and reputation based. Social
+following is base layer trust.
+
+Policy requires making decisions about other agents in the network, apparently.
+Instead, reputation based trust built on top of user's decision, etc. Hm hm.
+
+Example: search engines. PageRank; EigenTrust for p2p; propagation models;
+Advogato; TrustMail etc. This is a big one.
+
+Eigentrust algorithm for reputation Management in p2p networks seems relevant.
+IIRC we looked into this a bit, worth revisiting.
+
+Summary of a bunch of papers. 
+
+Using Trust in Open Networks - this is a big topic worth revisiting.
+
+Against consnesus. SSB wants to support pluralism and heterogeneity.
+
+Locke philosophy on social contract. Just enough consensus to operate.
+Accordibng to Locke, main feature of social contract is property rights.
+Interestingtly, for SBB it might be message schemas (one person). Diff from
+crypto?
+
+What's the con of DHTs? ``peers collab anon'', ``cant estimate
+trusthworthiness'' => poor privacy (can add peers to monitor you); poor sybil
+resistance (no way of knowing peer near you is on your side). For SSB, mapping
+computer network along social network (less spam, no friend with spam). This is
+a really interesting point.
+
+True Name is ed25519 key pair (libsodium). Nick Name (petname) for other peer.
+Human memorably symlink. Diff from property per se.
+
+Aside on boat vs different boats. Plato example ``philosopher king''. Captain of
+a ship, all in the same boat. But different between boats. Hmm. Ship of a state?
+Scale argument, interesting mental image considering risk of one boat vs
+multiple not same profile (lit - ``in the same boat'').
+
+Message - interpretation is subjective and Patchwork is just one of them. They
+are subjective. Meaning when two peers have same interpreation.
+
+Message: sig, sig pub key, content hash prev msg, seq num, timestamp, id of hash
+algo (sha256), content object.
+
+Example content object: {type: vote, vote {link: ...., value 1}}
+
+Unclear what metadata privacy looks like.
+
+Gossip: People relay/gossip info, improving availability. Messages signed so
+can't be forged, i.e. secure gossip.
+
+Users choose which feeds to sync by following. It looks at contact messages to
+know which users are followed.
+
+Replication: req newer than the one you know about, simple. Table of known
+peers, cycle through. Since messages are signed they can be distributed throguh
+sneakernet, or pigeon post. Which is awesome.
+
+Transitiive connections between Alice and Dan, via Pub etc.
+
+Blocking, can block individual. But not cryptoeconomically secure I believe, no
+moderation tools. Trust social scalability? Unclear. Subscribe to other peoples
+moderation? Humhum. Contact spam?
+
+Pubs run at public IPs, follow users. Mail bots improve uptime and availability.
+Anynody can create and intro own. Where is guide for how to run it?
+
+Oh they have react nativ nodes and all kinds of stuff. Hm hm.
+
+Try Patchwork.
+
+How does public channels work? And private channels?
+
+DHT vs Gossip dichotomy, think more.
+
+Scuttlebutt, run via WS possible. We should be able to do this.
+
+Subscribing to a channel lets you read messages from friends and friends of
+friends. But not from folks not in network :o It is just a way to org messges
+and conversation.
+
+Interesting stuff, worth revisiting and trying out.
 
 \textbf{Reading lists}
 Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
@@ -426,6 +568,16 @@ Ostrom 1990 - Governing the Commons
 SSB Handbook - dist sys see model
 
 Town Crier - authenticated data feed http://www.initc3.org/files/tc.pdf
+
+Schelling, Thomas C. (1966). Arms and Influence - talks about precommitment supposedly, weakness=strength
+
+Locke social contract
+
+Read more about Gossip protocol
+Also reputation systems (see SSB ex)
+
+Sybil attack
+
 
 
 \end{document}
