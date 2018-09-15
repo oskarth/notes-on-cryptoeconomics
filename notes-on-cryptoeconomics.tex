@@ -538,6 +538,39 @@ and conversation.
 
 Interesting stuff, worth revisiting and trying out.
 
+\textbf{Scuttlebutt Protocol Guide (-)}
+
+\link{https://ssbc.github.io/scuttlebutt-protocol-guide/}{link}
+
+Idenity keypair. Discovery in 3 ways local, invite, pub. Need ip, port and
+pubkey for peer. Local UDP broadcast every second availability.
+
+Invite includes domain and secret code user can redeem so pub can follow back.
+
+Pub advertised on someone's feed.
+
+Using a secret handshake key exchange, 4 step handshake. TCP, hello-hello-auth-accept.
+
+How can MITM not learn pub key from either peer?
+
+Compute ephemeral keys for FS. Probably worth re-reading Double Ratchet etc spec.
+
+There's box stream and RPC protocol. This isn't meant for skimming.
+
+createHistoryStream, ask peers if they have relevant messages. Signal which
+blobs want and have.
+
+Feeds and follow graph - 1 hop - explicitly follow; 2 hop - see in feed, friends
+of friends; 3 hop - fetched but not visibile; 4 hop - not fetched.
+
+Pubs stable IP, allow direct TCP. Gathering point for people. Follow and follow back.
+
+Encrypting and decrypting procedure outline.
+
+Darkness big questionmark.
+
+Also consider writing full sentences and paragrahs.
+
 \textbf{Reading lists}
 Distributed systems, solid: https://pdos.csail.mit.edu/6.824/schedule.html
 
@@ -578,6 +611,9 @@ Also reputation systems (see SSB ex)
 
 Sybil attack
 
+Double Ratchet X3DH HMAC PFS
+
+https://tools.ietf.org/html/rfc2104
 
 
 \end{document}
